@@ -1,8 +1,15 @@
 const FSBOConfig = {
   stripe: {
-    foundations: 'https://buy.stripe.com/test_foundations',
-    complete:    'https://buy.stripe.com/test_complete',
-    masterclass: 'https://buy.stripe.com/test_masterclass',
+    foundations: 'https://buy.stripe.com/test_6oUeVd4dKdWV50k9ITcZa00',
+    complete:    'https://buy.stripe.com/test_cNiaEX6lS7yx50kaMXcZa01',
+    masterclass: 'https://buy.stripe.com/test_28E00jh0w8CBeAU7ALcZa02',
+  },
+
+  // Access codes — change these before going live
+  accessCodes: {
+    'FSBO-F-2026': 'foundations',
+    'FSBO-C-2026': 'complete',
+    'FSBO-M-2026': 'masterclass',
   },
   courses: {
     foundations: {

@@ -87,6 +87,10 @@ const FSBOAuth = {
     return { done, total: config.modules.length };
   },
 
+  validateCode(code) {
+    return FSBOConfig.accessCodes[code.trim().toUpperCase()] || null;
+  },
+
   login(email, tier) {
     localStorage.setItem('fsbo_user', JSON.stringify({ email, tier, loginTime: Date.now() }));
   },
