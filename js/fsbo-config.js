@@ -1,8 +1,8 @@
 const FSBOConfig = {
   stripe: {
-    foundations: 'https://buy.stripe.com/test_14A5kD9y44ml9gA3kvcZa03',
-    complete:    'https://buy.stripe.com/test_cNiaEX6lS7yx50kaMXcZa01',
-    masterclass: 'https://buy.stripe.com/test_28E00jh0w8CBeAU7ALcZa02',
+    foundations: 'https://buy.stripe.com/eVqfZhaC63HiflG29r5os00',
+    complete:    'https://buy.stripe.com/4gM28r39E3Hi6PadS95os01',
+    masterclass: 'https://buy.stripe.com/14A00j8tY2Deddy5lD5os02',
   },
 
   // Access codes — change these before going live
