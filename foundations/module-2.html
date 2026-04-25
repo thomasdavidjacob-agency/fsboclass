@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 2: Pricing Your Home (CMA Basics) — FSBOClass.com</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="/dashboard.html" class="topbar-logo">FSBOCLASS</a>
+    <div class="topbar-user">
+      <span id="user-email"></span>
+      <span class="tier-badge" id="user-tier"></span>
+      <button class="btn-logout" onclick="FSBOAuth.logout()">Log Out</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-course-label">Foundations Course</div>
+      <div class="sidebar-progress">
+        <div style="font-size:12px;color:var(--muted);">Your progress</div>
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="sidebar-progress-fill" style="width:0%"></div></div>
+        <div class="progress-text" id="sidebar-progress-text">0 / 6 modules</div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <a href="/foundations/module-1.html" class="sidebar-module-link" id="sml-foundations-1"><span class="module-num">1</span><span>FSBO Overview &amp; Your Roadmap</span></a>
+      <a href="/foundations/module-2.html" class="sidebar-module-link active" id="sml-foundations-2"><span class="module-num">2</span><span>Pricing Your Home (CMA Basics)</span></a>
+      <a href="/foundations/module-3.html" class="sidebar-module-link" id="sml-foundations-3"><span class="module-num">3</span><span>Writing Your Listing</span></a>
+      <a href="/foundations/module-4.html" class="sidebar-module-link" id="sml-foundations-4"><span class="module-num">4</span><span>Showing Your Home Safely</span></a>
+      <a href="/foundations/module-5.html" class="sidebar-module-link" id="sml-foundations-5"><span class="module-num">5</span><span>Understanding Purchase Contracts</span></a>
+      <a href="/foundations/module-6.html" class="sidebar-module-link" id="sml-foundations-6"><span class="module-num">6</span><span>The Closing Process</span></a>
+    </aside>
+
+    <main class="main-content">
+      <div class="module-badge">MODULE 2</div>
+      <h1 class="module-title">Pricing Your Home &amp; CMA Basics</h1>
+      <div class="module-meta">
+        <span>📚 Foundations Course</span>
+        <span>⏱ 30 min read</span>
+        <span>🏠 Module 2 of 6</span>
+      </div>
+
+      <p>Pricing your home is the single most consequential decision in your entire FSBO sale. Set it too high and you'll sit on the market while buyers scroll past you. Set it too low and you'll leave real money behind — money you can never recover after closing. The good news: pricing a home accurately is not a mysterious skill that only agents possess. It is a research process, and this module teaches you exactly how to do it using the same data sources professionals use — most of which are free.</p>
+
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">🖼</div>
+        <div class="img-placeholder-label">Hero Image — Shutterstock</div>
+        <div class="img-placeholder-search">Search: "real estate agent analyzing market data charts laptop home valuation"</div>
+        <div class="img-placeholder-dims">Recommended: 1200×600px · Place above intro paragraph</div>
+      </div>
+
+      <h2>Why Pricing Is Everything</h2>
+      <p>The first 7 to 14 days your home is listed are its most powerful marketing window. Buyers in active markets set up automated alerts and are notified the moment a new listing appears that matches their search criteria. If your price is right, you'll see a surge of showings in the first week. If it's not, you'll see nothing — and that silence is the market speaking.</p>
+      <p>After two to three weeks without meaningful activity, most buyers and their agents assume something is wrong with the property. Even if you reduce your price later, the stigma of "why hasn't this sold?" follows the listing. A correctly priced home from day one is worth far more than a reduced listing on week four.</p>
+      <p>Studies consistently show that homes priced accurately from the first day sell faster and at higher final sale-to-list price ratios than homes that start too high and reduce. The sweet spot is not "aspirational" — it's data-driven.</p>
+
+      <div class="callout callout-warn">
+        <div class="callout-title">⚠️ The Most Common FSBO Pricing Mistake</div>
+        <p>The most common FSBO pricing error is letting emotional attachment drive the number. Your home is worth what buyers in your market will pay — not what you paid for it, not what you spent on renovations, not what Zillow's Zestimate says. The Zestimate can be off by 5–20% in either direction. Never use it as your primary pricing tool.</p>
+      </div>
+
+      <h2>Understanding the CMA</h2>
+      <p>A Comparative Market Analysis (CMA) is the tool real estate agents use to determine a recommended list price. It compares your home to similar homes that have recently sold in your area, adjusting for differences in size, condition, features, and location. You are going to build your own CMA using publicly available data.</p>
+      <p>A CMA is not an appraisal — it doesn't carry legal weight, and it's not performed by a licensed appraiser. But for pricing purposes, a well-constructed CMA is often more accurate than a formal appraisal because it incorporates the most recent market activity, not a standardized methodology that may lag behind current conditions.</p>
+
+      <h3>The Three Types of Comps You Need</h3>
+      <p>In CMA methodology, "comps" (comparable sales) fall into three categories. You need all three to price accurately.</p>
+      <ul>
+        <li><strong>Sold comps:</strong> Homes similar to yours that have closed in the last 90–180 days. These are the gold standard. They represent what buyers actually paid.</li>
+        <li><strong>Active comps:</strong> Homes similar to yours currently listed for sale. These represent your competition — the alternatives buyers will see alongside your listing. They tell you what the market ceiling looks like, though not what buyers are actually paying.</li>
+        <li><strong>Pending comps:</strong> Homes that have accepted offers but haven't yet closed. These are recent market signals that sold comps may not yet reflect — especially useful in fast-moving markets.</li>
+      </ul>
+
+      <h2>Step-by-Step: Running Your CMA on Zillow</h2>
+      <p>Zillow is the most accessible tool for FSBO sellers building a CMA. While it's not as granular as the MLS, its data is publicly available and sufficient for accurate pricing in most markets.</p>
+
+      <h3>Step 1: Define Your Search Parameters</h3>
+      <p>Start at Zillow.com. Navigate to the "Buy" section and enter your neighborhood or zip code. Apply the following filters:</p>
+      <ul>
+        <li><strong>Property type:</strong> Match yours exactly (single family, condo, townhouse)</li>
+        <li><strong>Bedrooms:</strong> Same as yours, or within one bedroom</li>
+        <li><strong>Bathrooms:</strong> Same as yours, or within one bathroom</li>
+        <li><strong>Square footage:</strong> Within 20% of your home's square footage</li>
+        <li><strong>Lot size:</strong> Similar to yours if you're in a suburban or rural market</li>
+        <li><strong>Year built:</strong> Within 15–20 years of your home's build date</li>
+      </ul>
+      <p>Switch the search status to "Sold" and set the date filter to "Last 6 months." You're looking for a minimum of five comparable sales. Ten or more is better. In rural areas with limited sales activity, you may need to expand your radius or time window.</p>
+
+      <h3>Step 2: Pull Sold Data on Redfin</h3>
+      <p>Repeat the same search on Redfin. Redfin often shows slightly different data than Zillow — particularly for days on market and price change history — and cross-referencing both platforms gives you a more complete picture. Redfin also shows the original list price alongside the final sale price, which is useful for understanding how negotiations typically land in your market.</p>
+
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">🖼</div>
+        <div class="img-placeholder-label">Content Image — Shutterstock</div>
+        <div class="img-placeholder-search">Search: "person using laptop computer searching real estate website zillow redfin"</div>
+        <div class="img-placeholder-dims">Recommended: 900×500px · Place after Redfin paragraph</div>
+      </div>
+
+      <h3>Step 3: Build Your Comp Sheet</h3>
+      <p>For each comparable sale you identify, record the following data in a spreadsheet:</p>
+      <ul>
+        <li>Address</li>
+        <li>Sale price</li>
+        <li>Square footage</li>
+        <li>Price per square foot (sale price ÷ square footage)</li>
+        <li>Bedrooms / Bathrooms</li>
+        <li>Year built</li>
+        <li>Days on market</li>
+        <li>Sale-to-list ratio (final sale price ÷ original list price)</li>
+        <li>Notable features (garage, pool, updated kitchen, etc.)</li>
+        <li>Distance from your home</li>
+      </ul>
+      <p>Your goal is to understand the range of prices in your market for homes like yours, with a particular focus on price per square foot. Once you have 8–12 comps in a spreadsheet, patterns become clear quickly.</p>
+
+      <h2>Understanding Price Per Square Foot</h2>
+      <p>Price per square foot (PPSF) is one of the most useful comparative metrics in real estate pricing — and one of the most misused. Here's how to use it correctly.</p>
+
+      <h3>How to Calculate PPSF</h3>
+      <p>Simple division: if a home sold for $420,000 and has 1,800 square feet of finished living space, its PPSF is $420,000 ÷ 1,800 = $233/sq ft. Calculate this for each of your comps and you'll quickly see what the market is paying per square foot for homes like yours.</p>
+
+      <h3>Important PPSF Limitations</h3>
+      <p>PPSF is a useful directional tool, not a precise pricing formula. It has known limitations you need to account for:</p>
+      <ul>
+        <li><strong>Smaller homes have higher PPSF.</strong> A 1,200 sq ft home almost always commands a higher PPSF than a 2,400 sq ft home in the same neighborhood. Don't compare a 1,000 sq ft cottage to a 2,500 sq ft colonial using the same PPSF benchmark.</li>
+        <li><strong>Finished basement square footage is valued differently.</strong> Many appraisers and agents use "above-grade" square footage only, treating basement space at a different rate. Clarify how each comp's square footage is reported.</li>
+        <li><strong>Lot size and location override PPSF in many markets.</strong> In urban markets, a corner lot or cul-de-sac position can add 5–15% to value independent of square footage.</li>
+      </ul>
+
+      <div class="callout callout-info">
+        <div class="callout-title">📊 The PPSF Reality Check</div>
+        <p>If the homes most similar to yours sold for $210–$230 per square foot and your home is 1,950 square feet, your baseline value range is $409,500–$448,500. Use your comp adjustments (condition, features, location) to narrow this to a specific price point within that range.</p>
+      </div>
+
+      <h2>Making Adjustments for Differences</h2>
+      <p>No two homes are identical. Once you have your baseline PPSF range, you need to adjust up or down based on how your home compares to each comp. This is called making "adjustments" — it's the same methodology licensed appraisers use, and it's more art than science at this level. Here's a framework:</p>
+
+      <h3>Positive Adjustments (Add Value)</h3>
+      <ul>
+        <li>Updated kitchen: $10,000–$25,000 depending on scope and market</li>
+        <li>Updated bathrooms: $5,000–$15,000 each</li>
+        <li>New roof: $3,000–$8,000</li>
+        <li>New HVAC system: $3,000–$6,000</li>
+        <li>Finished basement (if not counted in square footage): varies widely</li>
+        <li>Larger lot than comps: varies by market</li>
+        <li>Garage (if comps don't have one): $10,000–$20,000 in many markets</li>
+        <li>Better school district: quantifiable in some markets by cross-referencing across district lines</li>
+      </ul>
+
+      <h3>Negative Adjustments (Subtract Value)</h3>
+      <ul>
+        <li>Original/dated kitchen when comps have updated: subtract $10,000–$25,000</li>
+        <li>Smaller lot than comps: varies</li>
+        <li>Busy road or undesirable backing: $5,000–$20,000 depending on severity</li>
+        <li>Deferred maintenance items visible to buyers: subtract repair cost + inconvenience factor</li>
+        <li>Fewer bathrooms than most comps: $5,000–$12,000</li>
+      </ul>
+
+      <p>Work through each of your comps making these adjustments. Your adjusted comp values will converge on a price range. The midpoint of that range — adjusted for your current market's direction (rising or falling) — is your target list price.</p>
+
+      <div class="img-placeholder">
+        <div class="img-placeholder-icon">🖼</div>
+        <div class="img-placeholder-label">Content Image — Shutterstock</div>
+        <div class="img-placeholder-search">Search: "home valuation appraisal document pen real estate assessment paperwork"</div>
+        <div class="img-placeholder-dims">Recommended: 900×500px · Place after adjustments section</div>
+      </div>
+
+      <h2>Reading Your Market: Hot vs. Cool</h2>
+      <p>Your pricing strategy should reflect the current temperature of your local market. Pricing in a seller's market (low inventory, multiple offers common) is different from pricing in a buyer's market (high inventory, homes sitting).</p>
+
+      <h3>How to Read Your Market</h3>
+      <p>Look at the following indicators in your recent comps:</p>
+      <ul>
+        <li><strong>Days on market (DOM):</strong> If most comps sold in under 14 days, it's a hot market. If they're averaging 45+ days, it's slower.</li>
+        <li><strong>Sale-to-list ratio:</strong> If homes are selling at 100–105% of list price (over asking), demand is strong. If they're consistently selling at 95–97%, expect to negotiate down.</li>
+        <li><strong>Price reductions:</strong> How many of your comps had price reductions before selling? A high percentage signals an overheated listing environment where sellers initially overprice.</li>
+        <li><strong>Current inventory levels:</strong> Check how many active listings there are in your market for similar homes. Under two months of supply is a seller's market. Over six months is a buyer's market.</li>
+      </ul>
+
+      <h3>Pricing in a Hot Market</h3>
+      <p>In a seller's market, you have more pricing flexibility. You can list at the top of your comp range or even slightly above if recent sold data supports it. Some FSBO sellers in hot markets deliberately price just below market to generate multiple offers and drive the final price above their target. This strategy (covered in depth in Module 13) works well when inventory is tight and demand is strong.</p>
+
+      <h3>Pricing in a Normal or Cool Market</h3>
+      <p>In a balanced or buyer's market, price conservatively. Pricing aggressively in a slow market is the fastest way to become a stale listing that buyers avoid. In these conditions, aim for the middle of your comp range, and plan for negotiations that bring you down 1–3% from list price.</p>
+
+      <h2>Choosing Your List Price Strategy</h2>
+      <p>Once you know your target value range, you need to decide how to present it. There are three main list price strategies:</p>
+
+      <h3>1. Precision Pricing</h3>
+      <p>List at a specific, calculated number that reflects your exact comp analysis — for example, $387,500. This signals confidence and market knowledge to buyers and their agents. It can be effective in markets where comps support a clear, defensible number.</p>
+
+      <h3>2. Below-the-Round-Number Pricing</h3>
+      <p>Listing at $399,000 instead of $400,000 keeps you in more buyer search filters (many buyers set a maximum of $400K), and psychological research confirms that prices just below round numbers are perceived as materially lower even when the difference is minimal. This is standard practice and worth understanding. The inverse — listing at $401,000 — offers almost no benefit.</p>
+
+      <h3>3. Strategic Underpricing</h3>
+      <p>Deliberately pricing below market value to generate multiple offers and a bidding environment. This is a more advanced strategy covered fully in Module 13. It requires a market with sufficient buyer demand and the willingness to manage multiple offers simultaneously. Not appropriate in all markets.</p>
+
+      <div class="callout callout-tip">
+        <div class="callout-title">💡 The Zestimate Is a Starting Point, Not an Answer</div>
+        <p>Zillow's Zestimate uses an algorithm that doesn't account for your home's specific condition, recent renovations, or hyperlocal factors. In some markets and price ranges, Zestimates are remarkably accurate. In others, they're off by $30,000 or more. Use it as one data point among many — never as your sole pricing source.</p>
+      </div>
+
+      <h2>Common Pricing Mistakes and How to Avoid Them</h2>
+
+      <h3>Mistake 1: Pricing Based on What You Need</h3>
+      <p>Your financial needs — paying off your mortgage, funding a down payment on your next home, covering moving costs — are entirely irrelevant to market value. Buyers don't care what you need. They care what the home is worth. Price the home at market value and manage your finances separately.</p>
+
+      <h3>Mistake 2: Pricing Based on an Outdated Appraisal</h3>
+      <p>If you had your home appraised 18 months ago for a refinance, that number is likely stale. Real estate markets can move significantly in 12–24 months. Use current sold data, not an old appraisal.</p>
+
+      <h3>Mistake 3: Adding the Renovation Cost to Market Value</h3>
+      <p>You spent $40,000 remodeling your kitchen three years ago. That does not automatically add $40,000 to your home's value. In some markets and price ranges, a kitchen renovation adds full value or more. In others, it adds a fraction of the cost because buyers simply expect updated kitchens. Your comp analysis will reveal what the market actually pays for updated features in your neighborhood.</p>
+
+      <h3>Mistake 4: Refusing to Adjust When the Market Signals You're Wrong</h3>
+      <p>If you've been listed for 21 days with zero showings or showings but no offers, your price is almost certainly the issue. Don't wait 60 days hoping the right buyer will appear. Make a meaningful price adjustment (3–5% minimum — a $2,000 reduction on a $400,000 listing is noise) and reset your market momentum.</p>
+
+      <h3>Mistake 5: Using a Neighbor's Recent Sale Without Adjusting</h3>
+      <p>Your neighbor sold for $425,000. Your home has 200 fewer square feet, one fewer bathroom, and an original kitchen while theirs was updated. That sale is a useful data point but not a comparable — not without meaningful adjustments. Don't anchor your price to one recent sale without accounting for the differences.</p>
+
+      <div class="savings-table">
+        <div class="savings-table-header">📊 SAMPLE CMA WORKSHEET — 4BR/2BA, 2,100 SQ FT</div>
+        <div class="savings-row"><span class="label">123 Oak St — Sold $399K — 2,050 sq ft — Updated kitchen</span><span class="value highlight">$194/sq ft</span></div>
+        <div class="savings-row"><span class="label">456 Elm Ave — Sold $385K — 2,150 sq ft — Original kitchen</span><span class="value highlight">$179/sq ft</span></div>
+        <div class="savings-row"><span class="label">789 Pine Rd — Sold $412K — 2,080 sq ft — Updated kitchen + baths</span><span class="value highlight">$198/sq ft</span></div>
+        <div class="savings-row"><span class="label">Average PPSF of comps</span><span class="value">$190/sq ft</span></div>
+        <div class="savings-row"><span class="label">Your home: 2,100 sq ft × $190</span><span class="value">$399,000</span></div>
+        <div class="savings-row total"><span class="label">Recommended list price range</span><span class="value">$385K – $415K</span></div>
+      </div>
+
+      <h2>Getting a Second Opinion</h2>
+      <p>Your CMA is your primary pricing tool, but there's nothing wrong with seeking a second data point. Here are two legitimate ways to get one:</p>
+
+      <h3>Request a Free CMA From an Agent (Don't List With Them)</h3>
+      <p>Many listing agents will provide a free CMA hoping to earn your listing. You can request one — and it can be genuinely useful as a calibration tool — without any obligation to list with them. Be upfront that you're exploring FSBO but want a professional opinion on pricing. Most agents will provide the CMA anyway, knowing there's still a chance you'll eventually call them. Take the free information.</p>
+
+      <h3>Order a Pre-Listing Appraisal</h3>
+      <p>For $300–$600, you can hire a licensed appraiser to provide a formal opinion of value before you list. This is particularly valuable for unusual properties that are hard to comp — custom homes, properties with acreage, or homes in areas with few recent sales. The appraisal can also be used as a negotiating tool if a buyer's appraisal comes in lower than expected.</p>
+
+      <div class="takeaways-box">
+        <h3>🎯 Key Takeaways</h3>
+        <ul>
+          <li>The first 7–14 days on market are your most powerful window — pricing right from day one is essential</li>
+          <li>A CMA compares your home to similar recently sold properties using price per square foot and adjusted differences</li>
+          <li>Use both Zillow and Redfin to pull comp data — cross-referencing both platforms gives a more complete picture</li>
+          <li>Price per square foot is a useful directional tool but must be adjusted for home size, condition, and features</li>
+          <li>Read your market's DOM, sale-to-list ratios, and inventory levels to calibrate your pricing strategy</li>
+          <li>If you receive no showings within 21 days, your price is almost certainly the issue — adjust meaningfully</li>
+        </ul>
+      </div>
+
+      <div class="action-box">
+        <h3>✅ Action Steps</h3>
+        <ol>
+          <li>Pull 8–12 sold comps from Zillow for homes similar to yours (same type, within 20% square footage, sold in last 6 months).</li>
+          <li>Repeat the search on Redfin and note any differences in data, especially price reductions and original list prices.</li>
+          <li>Build a spreadsheet with all comps: address, sale price, square footage, PPSF, days on market, and sale-to-list ratio.</li>
+          <li>Calculate the average PPSF of your comps, then apply adjustments up or down for your home's specific features and condition.</li>
+          <li>Determine your target list price range and select a specific list price using one of the three strategies in this module.</li>
+        </ol>
+      </div>
+
+      <div class="module-nav">
+        <a href="/foundations/module-1.html" class="nav-btn prev">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span><span class="nav-btn-label">Previous Module</span>FSBO Overview &amp; Your Roadmap</span>
+        </a>
+        <a href="/foundations/module-3.html" class="nav-btn next">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span><span class="nav-btn-label">Next Module</span>Writing Your Listing</span>
+        </a>
+      </div>
+
+      <div class="complete-section">
+        <button id="mark-complete-btn" onclick="FSBOAuth.markComplete('foundations-2')">Mark Module Complete</button>
+        <div id="completion-message">🎉 Module 2 complete! Move on to Module 3.</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/fsbo-config.js"></script>
+  <script src="/js/fsbo-auth.js"></script>
+  <script>
+    FSBOAuth.requireAccess('foundations');
+    FSBOAuth.checkComplete('foundations-2');
+    const p = FSBOAuth.getProgress('foundations');
+    document.getElementById('sidebar-progress-fill').style.width = Math.round(p.done/p.total*100) + '%';
+    document.getElementById('sidebar-progress-text').textContent = p.done + ' / ' + p.total + ' modules';
+    FSBOConfig.courses.foundations.modules.forEach(m => {
+      const el = document.getElementById('sml-' + m.id);
+      if (el && FSBOAuth.isComplete(m.id)) el.classList.add('completed');
+    });
+  </script>
+</body>
+</html>

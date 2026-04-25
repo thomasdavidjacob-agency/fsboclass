@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — FSBOClass.com</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="/" class="topbar-logo">FSBOCLASS</a>
+    <div class="topbar-user">
+      <span id="user-email"></span>
+      <span class="tier-badge" id="user-tier"></span>
+      <button class="btn-logout" onclick="FSBOAuth.logout()">Log Out</button>
+    </div>
+  </div>
+
+  <div style="padding-top:var(--topbar-h);">
+    <div style="max-width:960px;margin:0 auto;padding:48px 40px 80px;">
+      <div style="margin-bottom:40px;">
+        <h1 style="font-family:'Anton',sans-serif;font-size:36px;margin-bottom:8px;">Your Dashboard</h1>
+        <p style="color:var(--muted);font-size:15px;">Pick up where you left off or start a new course.</p>
+      </div>
+
+      <div id="course-grid" class="dashboard-grid"></div>
+
+      <div style="margin-top:60px;padding-top:40px;border-top:1px solid var(--border);">
+        <h2 style="font-family:'Anton',sans-serif;font-size:22px;margin-bottom:20px;">Your Progress</h2>
+        <div id="progress-summary"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/fsbo-config.js"></script>
+  <script src="/js/fsbo-auth.js"></script>
+  <script>
+    FSBOAuth.requireAccess('foundations');
+
+    const user = FSBOAuth.getUser();
+    document.getElementById('user-email').textContent = user.email;
+    document.getElementById('user-tier').textContent = user.tier.charAt(0).toUpperCase() + user.tier.slice(1);
+
+    const tierLevel = FSBOAuth.tiers[user.tier];
+    const grid = document.getElementById('course-grid');
+    const progressEl = document.getElementById('progress-summary');
+
+    for (const [key, course] of Object.entries(FSBOConfig.courses)) {
+      const required = FSBOAuth.tiers[key];
+      const hasAccess = tierLevel >= required;
+      const progress = FSBOAuth.getProgress(key);
+      const pct = Math.round((progress.done / progress.total) * 100);
+      const firstModule = course.modules[0];
+
+      const card = document.createElement('a');
+      card.href = hasAccess ? firstModule.file : '/fsbo-pricing.html?upgrade=' + key;
+      card.className = 'course-card';
+
+      card.innerHTML = `
+        <div class="course-card-badge">${hasAccess ? key.toUpperCase() + ' COURSE' : '🔒 UPGRADE REQUIRED'}</div>
+        <div class="course-card-title">${course.name} Course</div>
+        <div class="course-card-desc">${course.modules.length} modules · $${course.price}</div>
+        ${hasAccess ? `
+          <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+          <div class="progress-text">${progress.done} / ${progress.total} modules complete</div>
+        ` : `<div style="margin-top:12px;"><span style="background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:6px 14px;border-radius:6px;">Upgrade to Unlock →</span></div>`}
+      `;
+      grid.appendChild(card);
+
+      if (hasAccess) {
+        const row = document.createElement('div');
+        row.style = 'margin-bottom:20px;';
+        row.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-weight:700;font-size:15px;">${course.name}</span>
+            <span style="font-size:13px;color:var(--muted);">${progress.done}/${progress.total} modules</span>
+          </div>
+          <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+        `;
+        progressEl.appendChild(row);
+      }
+    }
+  </script>
+</body>
+</html>
