@@ -1,6 +1,6 @@
 const FSBOConfig = {
   stripe: {
-    foundations: 'https://buy.stripe.com/test_6oUeVd4dKdWV50k9ITcZa00',
+    foundations: 'https://buy.stripe.com/test_14A5kD9y44ml9gA3kvcZa03',
     complete:    'https://buy.stripe.com/test_cNiaEX6lS7yx50kaMXcZa01',
     masterclass: 'https://buy.stripe.com/test_28E00jh0w8CBeAU7ALcZa02',
   },
