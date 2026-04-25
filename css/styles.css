@@ -89,6 +89,12 @@ body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--te
 .img-placeholder-search { font-size: 13px; color: var(--muted); font-style: italic; }
 .img-placeholder-dims { font-size: 11px; color: #555; margin-top: 4px; }
 
+/* ── Module images ── */
+.module-img {
+  width: 100%; display: block; border-radius: 12px;
+  margin: 32px 0; object-fit: cover; max-height: 480px;
+}
+
 /* ── Callout boxes ── */
 .callout { border-radius: 10px; padding: 20px 24px; margin: 28px 0; border-left: 4px solid; }
 .callout-title { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
