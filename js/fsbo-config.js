@@ -5,11 +5,15 @@ const FSBOConfig = {
     masterclass: 'https://buy.stripe.com/14A00j8tY2Deddy5lD5os02',
   },
 
-  // Access codes — change these before going live
+  // Access codes — generated via /admin/codegen.html
+  // Each customer gets a unique code. Add new ones here after generating them.
+  // Format: 'FSBO-X-XXXXXXXX': 'tier'
   accessCodes: {
-    'FSBO-F-2026': 'foundations',
-    'FSBO-C-2026': 'complete',
-    'FSBO-M-2026': 'masterclass',
+    // Owner / test codes (keep private)
+    'FSBO-F-OWNER001': 'foundations',
+    'FSBO-C-OWNER001': 'complete',
+    'FSBO-M-OWNER001': 'masterclass',
+    // Add customer codes below — use /admin/codegen.html to generate them
   },
   courses: {
     foundations: {

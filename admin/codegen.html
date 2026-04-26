@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Generator — FSBOClass Admin</title>
+  <style>
+    :root {
+      --bg: #0d0d0d; --card: #181818; --border: #2a2a2a;
+      --orange: #e85d04; --green: #16a34a; --text: #f0f0f0;
+      --muted: #888; --red: #dc2626;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; }
+
+    #lock-screen {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 24px;
+    }
+    #lock-screen h1 { font-size: 22px; margin-bottom: 8px; }
+    #lock-screen p { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+    #lock-screen input {
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+      padding: 12px 16px; font-size: 16px; color: var(--text); width: 280px; display: block;
+      margin-bottom: 12px; outline: none;
+    }
+    #lock-screen input:focus { border-color: var(--orange); }
+    #lock-error { font-size: 13px; color: var(--red); margin-top: -4px; margin-bottom: 12px; display: none; }
+
+    #app { display: none; max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+    .header h1 { font-size: 24px; }
+    .header span { font-size: 13px; color: var(--muted); }
+
+    .tier-section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+    .tier-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .tier-name { font-size: 18px; font-weight: 700; }
+    .tier-price { font-size: 13px; color: var(--muted); }
+    .tier-count { font-size: 13px; color: var(--muted); }
+
+    .gen-row { display: flex; gap: 12px; margin-bottom: 20px; }
+    .gen-input {
+      flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 14px; font-size: 14px; color: var(--text); outline: none;
+    }
+    .gen-input::placeholder { color: var(--muted); }
+    .gen-input:focus { border-color: var(--orange); }
+
+    .btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .15s; }
+    .btn-generate { background: var(--orange); color: #fff; }
+    .btn-generate:hover { background: #ff6b1a; }
+    .btn-copy { background: var(--border); color: var(--text); padding: 6px 12px; font-size: 12px; }
+    .btn-copy:hover { background: #3a3a3a; }
+    .btn-copy.copied { background: var(--green); color: #fff; }
+    .btn-export { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 8px 16px; font-size: 13px; }
+    .btn-export:hover { border-color: var(--orange); color: var(--orange); }
+    .btn-clear { background: transparent; border: 1px solid var(--red); color: var(--red); padding: 6px 12px; font-size: 12px; }
+    .btn-clear:hover { background: rgba(220,38,38,.1); }
+
+    .code-list { display: flex; flex-direction: column; gap: 8px; }
+    .code-row {
+      display: grid; grid-template-columns: 1fr 160px auto auto;
+      gap: 10px; align-items: center; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px;
+    }
+    .code-value { font-family: 'Courier New', monospace; font-size: 14px; font-weight: 700; color: var(--orange); letter-spacing: .5px; }
+    .code-customer { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .code-date { font-size: 11px; color: var(--muted); text-align: right; }
+
+    .empty-state { text-align: center; padding: 24px; color: var(--muted); font-size: 14px; }
+
+    .instructions { background: rgba(232,93,4,.07); border: 1px solid rgba(232,93,4,.2); border-radius: 10px; padding: 20px 24px; margin-bottom: 32px; }
+    .instructions h3 { font-size: 15px; color: var(--orange); margin-bottom: 10px; }
+    .instructions ol { padding-left: 20px; }
+    .instructions li { font-size: 13px; color: var(--muted); line-height: 1.8; }
+    .instructions code { background: var(--bg); border-radius: 4px; padding: 1px 6px; font-size: 12px; color: var(--text); }
+
+    .export-modal {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.8);
+      align-items: center; justify-content: center; z-index: 999;
+    }
+    .export-modal.open { display: flex; }
+    .export-box { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; max-width: 600px; width: 90%; }
+    .export-box h3 { font-size: 16px; margin-bottom: 16px; }
+    .export-box textarea {
+      width: 100%; height: 200px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px; font-family: 'Courier New', monospace; font-size: 12px;
+      color: var(--text); resize: vertical; outline: none;
+    }
+    .export-actions { display: flex; gap: 10px; margin-top: 14px; justify-content: flex-end; }
+  </style>
+</head>
+<body>
+
+<!-- Lock screen -->
+<div id="lock-screen">
+  <h1>FSBOClass Admin</h1>
+  <p>Enter admin password to continue</p>
+  <input type="password" id="admin-pw" placeholder="Admin password" onkeydown="if(event.key==='Enter')unlock()" autofocus />
+  <div id="lock-error">Incorrect password</div>
+  <button class="btn btn-generate" onclick="unlock()">Unlock</button>
+</div>
+
+<!-- Main app -->
+<div id="app">
+  <div class="header">
+    <h1>Code Generator</h1>
+    <span id="code-total-count"></span>
+  </div>
+
+  <div class="instructions">
+    <h3>How to issue a code</h3>
+    <ol>
+      <li>Enter the customer's name or email in the field, then click <strong>Generate Code</strong></li>
+      <li>Click <strong>Copy</strong> next to the new code and send it to your customer</li>
+      <li>Click <strong>Export for Config</strong> to get all codes → paste the <code>accessCodes</code> block into <code>js/fsbo-config.js</code></li>
+      <li>Commit the updated config to GitHub — Vercel auto-deploys in ~30 seconds</li>
+    </ol>
+  </div>
+
+  <!-- Foundations -->
+  <div class="tier-section">
+    <div class="tier-header">
+      <div>
+        <div class="tier-name">Foundations</div>
+        <div class="tier-price">$97 · foundations tier</div>
+      </div>
+      <div class="tier-count" id="count-foundations">0 codes issued</div>
+    </div>
+    <div class="gen-row">
+      <input class="gen-input" id="name-foundations" placeholder="Customer name or email (optional)" />
+      <button class="btn btn-generate" onclick="generateCode('foundations')">Generate Code</button>
+    </div>
+    <div class="code-list" id="list-foundations">
+      <div class="empty-state">No codes generated yet</div>
+    </div>
+  </div>
+
+  <!-- Complete -->
+  <div class="tier-section">
+    <div class="tier-header">
+      <div>
+        <div class="tier-name">Complete</div>
+        <div class="tier-price">$197 · complete tier</div>
+      </div>
+      <div class="tier-count" id="count-complete">0 codes issued</div>
+    </div>
+    <div class="gen-row">
+      <input class="gen-input" id="name-complete" placeholder="Customer name or email (optional)" />
+      <button class="btn btn-generate" onclick="generateCode('complete')">Generate Code</button>
+    </div>
+    <div class="code-list" id="list-complete">
+      <div class="empty-state">No codes generated yet</div>
+    </div>
+  </div>
+
+  <!-- Masterclass -->
+  <div class="tier-section">
+    <div class="tier-header">
+      <div>
+        <div class="tier-name">Masterclass</div>
+        <div class="tier-price">$397 · masterclass tier</div>
+      </div>
+      <div class="tier-count" id="count-masterclass">0 codes issued</div>
+    </div>
+    <div class="gen-row">
+      <input class="gen-input" id="name-masterclass" placeholder="Customer name or email (optional)" />
+      <button class="btn btn-generate" onclick="generateCode('masterclass')">Generate Code</button>
+    </div>
+    <div class="code-list" id="list-masterclass">
+      <div class="empty-state">No codes generated yet</div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:12px;margin-top:8px;">
+    <button class="btn btn-export" onclick="openExport()">Export for Config (fsbo-config.js)</button>
+    <button class="btn btn-clear" onclick="clearAll()">Clear All History</button>
+  </div>
+</div>
+
+<!-- Export modal -->
+<div class="export-modal" id="export-modal">
+  <div class="export-box">
+    <h3>Paste this into <code style="font-size:13px;background:#0d0d0d;padding:2px 6px;border-radius:4px;">js/fsbo-config.js</code> — replace the <code style="font-size:13px;background:#0d0d0d;padding:2px 6px;border-radius:4px;">accessCodes</code> block</h3>
+    <textarea id="export-text" readonly></textarea>
+    <div class="export-actions">
+      <button class="btn btn-copy" onclick="copyExport()">Copy All</button>
+      <button class="btn btn-export" onclick="closeExport()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Change this password — it's stored only in this file
+  const ADMIN_PASSWORD = 'FSBOAdmin2026';
+  const STORAGE_KEY = 'fsbo_admin_codes';
+  const TIERS = ['foundations', 'complete', 'masterclass'];
+  const TIER_PREFIX = { foundations: 'F', complete: 'C', masterclass: 'M' };
+
+  function unlock() {
+    const pw = document.getElementById('admin-pw').value;
+    if (pw === ADMIN_PASSWORD) {
+      document.getElementById('lock-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      renderAll();
+    } else {
+      document.getElementById('lock-error').style.display = 'block';
+      document.getElementById('admin-pw').value = '';
+      document.getElementById('admin-pw').focus();
+    }
+  }
+
+  function randomSegment() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let s = '';
+    const arr = new Uint8Array(8);
+    crypto.getRandomValues(arr);
+    for (let i = 0; i < 8; i++) s += chars[arr[i] % chars.length];
+    return s;
+  }
+
+  function generateCode(tier) {
+    const prefix = TIER_PREFIX[tier];
+    const code = 'FSBO-' + prefix + '-' + randomSegment();
+    const customer = document.getElementById('name-' + tier).value.trim() || '—';
+    const record = { code, tier, customer, date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) };
+
+    const all = loadCodes();
+    all.unshift(record);
+    saveCodes(all);
+
+    document.getElementById('name-' + tier).value = '';
+    renderAll();
+    updateConfigWarning();
+  }
+
+  function loadCodes() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
+  }
+
+  function saveCodes(codes) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(codes));
+  }
+
+  function renderAll() {
+    const all = loadCodes();
+    let total = 0;
+    TIERS.forEach(tier => {
+      const codes = all.filter(c => c.tier === tier);
+      total += codes.length;
+      document.getElementById('count-' + tier).textContent = codes.length + ' code' + (codes.length === 1 ? '' : 's') + ' issued';
+      const list = document.getElementById('list-' + tier);
+      if (codes.length === 0) {
+        list.innerHTML = '<div class="empty-state">No codes generated yet</div>';
+      } else {
+        list.innerHTML = codes.map((c, i) => `
+          <div class="code-row">
+            <span class="code-value">${c.code}</span>
+            <span class="code-customer" title="${c.customer}">${c.customer}</span>
+            <span class="code-date">${c.date}</span>
+            <button class="btn btn-copy" onclick="copyCode(this,'${c.code}')">Copy</button>
+          </div>
+        `).join('');
+      }
+    });
+    document.getElementById('code-total-count').textContent = total + ' total code' + (total === 1 ? '' : 's') + ' in history';
+  }
+
+  function copyCode(btn, code) {
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+    });
+  }
+
+  function openExport() {
+    const all = loadCodes();
+    const lines = [];
+    lines.push('  accessCodes: {');
+
+    TIERS.forEach((tier, ti) => {
+      const codes = all.filter(c => c.tier === tier);
+      if (codes.length > 0) {
+        lines.push('    // ' + tier.charAt(0).toUpperCase() + tier.slice(1) + ' — ' + codes.length + ' issued code' + (codes.length === 1 ? '' : 's'));
+        codes.forEach(c => {
+          const label = c.customer !== '—' ? c.customer + ' · ' + c.date : c.date;
+          lines.push(`    '${c.code}': '${c.tier}',  // ${label}`);
+        });
+      }
+    });
+
+    lines.push('  },');
+
+    document.getElementById('export-text').value = lines.join('\n');
+    document.getElementById('export-modal').classList.add('open');
+  }
+
+  function closeExport() {
+    document.getElementById('export-modal').classList.remove('open');
+  }
+
+  function copyExport() {
+    const ta = document.getElementById('export-text');
+    navigator.clipboard.writeText(ta.value).then(() => {
+      const btn = event.target;
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy All'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function clearAll() {
+    if (confirm('Delete all code history? The codes stay valid in fsbo-config.js — this only clears your local log.')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderAll();
+    }
+  }
+
+  function updateConfigWarning() {}
+
+  document.getElementById('export-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeExport();
+  });
+</script>
+</body>
+</html>
