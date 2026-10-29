@@ -57,7 +57,7 @@
       card.className = 'course-card';
 
       card.innerHTML = `
-        <div class="course-card-badge">${hasAccess ? key.toUpperCase() + ' COURSE' : '🔒 UPGRADE REQUIRED'}</div>
+        <div class="course-card-badge">${hasAccess ? key.toUpperCase() + ' COURSE' : 'UPGRADE REQUIRED'}</div>
         <div class="course-card-title">${course.name} Course</div>
         <div class="course-card-desc">${course.modules.length} modules · $${course.price}</div>
         ${hasAccess ? `
